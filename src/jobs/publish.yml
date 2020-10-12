@@ -4,16 +4,7 @@ description: >
 parameters:
   path:
     type: string
-  NPM_USER:
-    type: string
-  NPM_PASS:
-    type: string
-  NPM_EMAIL:
-    type: string
-  NPM_REGISTRY:
-    type: string
-    default: https://npm.pkg.github.com/
-  NPM_ACCESS:
+  access:
     type: string
     default: public
 
@@ -25,7 +16,7 @@ steps:
       at: .
   - run:
       name: Initializing npm publishing
-      command: sudo npm install -g npm-cli-adduser && npm-cli-adduser -u <<parameters.NPM_USER>> -p <<parameters.NPM_PASS>> -e <<parameters.NPM_EMAIL>> -r <<parameters.NPM_REGISTRY>>
+      command: sudo npm install -g npm-cli-adduser && npm-cli-adduser
   - run:
       name: Publishing npm package
-      command: cd <<parameters.path>> && npm publish --access=<<parameters.NPM_ACCESS>>
+      command: cd <<parameters.path>> && npm publish --access=<<parameters.access>>

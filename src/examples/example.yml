@@ -13,3 +13,10 @@ usage:
         - angular-npm-orb/test:
             parameters:
               - project: example-angular-npm-lib
+        - angular-npm-orb/build:
+            parameters:
+              - project: example-angular-npm-lib
+        - angular-npm-orb/publish:
+            parameters:
+              - project: example-angular-npm-lib
+              - access: private
