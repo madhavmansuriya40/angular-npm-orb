@@ -16,6 +16,6 @@ usage:
             project: test-lib
         - angular-npm-orb/publish:
             requires:
-              angular-npm-orb/build
+              - angular-npm-orb/build
             path: example-angular-npm-lib/dist/test-lib
             access: private
