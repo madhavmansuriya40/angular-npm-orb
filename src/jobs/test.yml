@@ -5,7 +5,7 @@ parameters:
   project:
     type: string
 
-executor: 
+executor:
   docker:
     - image: circleci/node:browsers
 

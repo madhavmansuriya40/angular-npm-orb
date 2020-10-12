@@ -8,7 +8,7 @@ parameters:
     type: string
     default: public
 
-executor: 
+executor:
   docker:
     - image: circleci/node
 
