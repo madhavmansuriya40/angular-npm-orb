@@ -1,0 +1,71 @@
+version: 2.1
+
+description: >
+  Test, build and publish Angular libraries to npm.
+
+executors:
+  node:
+    docker:
+      - image: circleci/node
+  browsers:
+    docker:
+      - image: circleci/node:browsers
+
+jobs:
+  test:
+    parameters:
+      project:
+        type: string
+
+    executor: browsers
+    steps:
+      - checkout
+      - common/npm-install
+      - common/chrome-upgrade
+      - run:
+          name: 🛠️ Building
+          command: npm run build -- << parameters.project >>
+      - run:
+          name: ✅ Running unit tests
+          command: npm run test -- << parameters.project >> --watch false --progress false
+      - run:
+          name: ✅ Running e2e tests
+          command: npm run e2e -- << parameters.project >>
+      - store_test_results:
+          path: test-results
+
+  build:
+    parameters:
+      project:
+        type: string
+
+    executor: node
+    steps:
+      - checkout
+      - common/npm-install
+      - run:
+          name: 🛠️ Building
+          command: npm run build -- << parameters.project >>
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+
+  publish:
+    parameters:
+      path:
+        type: string
+      access:
+        type: string
+        default: public
+
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: 🛠️ Initializing npm-cli-adduser
+          command: sudo npm install -g npm-cli-adduser && npm-cli-adduser
+      - run:
+          name: 📦 Publishing npm package
+          command: cd << parameters.path >> && npm publish --access=<< parameters.access >>

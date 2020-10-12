@@ -1,0 +1,63 @@
+version: 2.1
+
+orbs:
+  angular-npm-orb: code0987/angular-npm-orb@<<pipeline.parameters.dev-orb-version>>
+  orb-tools: circleci/orb-tools@10.0
+  bats: circleci/bats@1.0
+  shellcheck: circleci/shellcheck@2.0
+
+parameters:
+  dev-orb-version:
+    description: >
+      The development version of the orb to test.
+      This value is automatically adjusted by the "trigger-integration-tests-workflow" job to correspond with the specific version created by the commit and should not be edited.
+      A "dev:alpha" version must exist for the initial pipeline run.
+    type: string
+    default: "dev:alpha"
+
+workflows:
+  test-pack:
+    jobs:
+      - orb-tools/lint
+      - orb-tools/pack
+      - shellcheck/check:
+          dir: ./src/scripts
+          exclude: SC2148
+      - hold-for-dev-publish:
+          type: approval
+          requires:
+            - orb-tools/lint
+            - orb-tools/pack
+            - shellcheck/check
+      - orb-tools/publish-dev:
+          orb-name: <namespace>/<orb-name>
+          context: <publishing-context> # A restricted context containing your private publishing credentials. Will only execute if approved by an authorized user.
+          requires: [hold-for-dev-publish]
+      # Trigger an integration workflow to test the
+      # dev:${CIRCLE_SHA1:0:7} version of your orb
+      - orb-tools/trigger-integration-tests-workflow:
+          name: trigger-integration-dev
+          context: <publishing-context>
+          requires:
+            - orb-tools/publish-dev
+
+  integration-test_deploy:
+    when: << pipeline.parameters.run-integration-tests >>
+    jobs:
+      # Run any integration tests defined within the `jobs` key.
+      - integration-test-1
+      # Publish a semver version of the orb. relies on
+      # the commit subject containing the text "[semver:patch|minor|major|skip]"
+      # as that will determine whether a patch, minor or major
+      # version will be published or if publishing should
+      # be skipped.
+      # e.g. [semver:patch] will cause a patch version to be published.
+      - orb-tools/dev-promote-prod-from-commit-subject:
+          orb-name: code0987/angular-npm-orb
+          context: <publishing-context>
+          add-pr-comment: false
+          fail-if-semver-not-indicated: true
+          publish-version-tag: false
+          filters:
+            branches:
+              only: master
