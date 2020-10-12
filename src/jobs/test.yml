@@ -4,10 +4,10 @@ description: >
 parameters:
   project:
     type: string
-  skip-tests:
+  test:
     type: boolean
     default: false
-  skip-e2e:
+  e2e:
     type: boolean
     default: true
 
@@ -35,11 +35,11 @@ steps:
       command: npm run build -- <<parameters.project>>
   - run:
       name: Running unit tests
-      condition: <<parameters.skip-tests>>
+      condition: <<parameters.test>>
       command: npm run test --watch false --progress false --no-sandbox --headless -- <<parameters.project>>
   - run:
       name: Running e2e tests
-      condition: <<parameters.skip-e2e>>
+      condition: <<parameters.e2e>>
       command: npm run e2e -- <<parameters.project>>
   - store_test_results:
       path: test-results
