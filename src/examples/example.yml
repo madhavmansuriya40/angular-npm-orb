@@ -7,7 +7,6 @@ usage:
   version: 2.1
   orbs:
     angular-npm-orb: code0987/angular-npm-orb@1.2.3
-  workflows:
-    jobs:
-    - angular-npm-orb/test:
-      project: example-angular-npm-lib
+  jobs:
+  - angular-npm-orb/test:
+    project: example-angular-npm-lib
