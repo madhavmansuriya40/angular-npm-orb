@@ -1,0 +1,5 @@
+description: >
+  Docker and Node with browsers.
+
+docker:
+  - image: 'circleci/node:browsers'

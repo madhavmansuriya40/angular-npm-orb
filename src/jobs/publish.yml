@@ -10,7 +10,6 @@ parameters:
 
 executor:
   name: node
-  image: circleci/node
 
 steps:
   - attach_workspace:

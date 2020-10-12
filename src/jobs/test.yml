@@ -7,7 +7,6 @@ parameters:
 
 executor:
   name: browsers
-  image: circleci/node:browsers
 
 steps:
   - checkout
