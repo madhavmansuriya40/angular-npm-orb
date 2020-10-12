@@ -16,8 +16,8 @@ steps:
   - attach_workspace:
       at: .
   - run:
-      name: 🛠️ Initializing npm publishing
+      name: Initializing npm publishing
       command: sudo npm install -g npm-cli-adduser && npm-cli-adduser
   - run:
-      name: 📦 Publishing npm package
+      name: Publishing npm package
       command: cd << parameters.path >> && npm publish --access=<< parameters.access >>

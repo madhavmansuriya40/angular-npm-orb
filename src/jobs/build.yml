@@ -12,13 +12,13 @@ executor:
 steps:
   - checkout
   - run:
-      name: 🛠️ Installing npm dependencies
+      name: Installing npm dependencies
       command: if [ ! -d "node_modules" ]; then npm ci; fi
   - run:
-      name: 🛠️ Restoring package-lock.json
+      name: Restoring package-lock.json
       command: git checkout package-lock.json
   - run:
-      name: 🛠️ Building
+      name: Building
       command: npm run build -- << parameters.project >>
   - persist_to_workspace:
       root: .
