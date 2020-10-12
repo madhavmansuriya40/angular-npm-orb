@@ -81,6 +81,7 @@ workflows:
       - angular-npm-orb/publish:
           requires:
             - angular-npm-orb/build
+          context: orb-publishing
           path: dist/test-lib
           access: private
       # Publish a semver version of the orb. relies on
