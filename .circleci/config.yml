@@ -75,19 +75,16 @@ workflows:
       # Run any integration tests defined within the `jobs` key.
       - integration-test-1
       - angular-npm-orb/test:
-          parameters:
-            - project: test-lib
+          project: test-lib
           working_directory: ~/src/examples/example-angular-npm-lib
       - angular-npm-orb/build:
-          parameters:
-            - project: test-lib
+          project: test-lib
           working_directory: ~/src/examples/example-angular-npm-lib
       - angular-npm-orb/publish:
           requires:
             - angular-npm-orb/build
-          parameters:
-            - path: example-angular-npm-lib/dist/test-lib
-            - access: private
+          path: example-angular-npm-lib/dist/test-lib
+          access: private
           working_directory: ~/src/examples/example-angular-npm-lib
       # Publish a semver version of the orb. relies on
       # the commit subject containing the text "[semver:patch|minor|major|skip]"
