@@ -4,9 +4,6 @@ description: >
 parameters:
   path:
     type: string
-  access:
-    type: string
-    default: public
   NPM_USER:
     type: string
   NPM_PASS:
@@ -16,6 +13,9 @@ parameters:
   NPM_REGISTRY:
     type: string
     default: https://npm.pkg.github.com/
+  NPM_ACCESS:
+    type: string
+    default: public
 
 executor:
   name: node
