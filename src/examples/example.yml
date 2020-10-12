@@ -8,5 +8,5 @@ usage:
   orbs:
     angular-npm-orb: code0987/angular-npm-orb@1.2.3
   jobs:
-    - angular-npm-orb/test:
+    angular-npm-orb/test:
       project: example-angular-npm-lib
