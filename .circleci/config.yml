@@ -31,21 +31,6 @@ jobs:
       # "greet" is a sample command packaged with this orb config.
       # This sample integration test will run as long as the greet command exists. Once you remove the greet command you should remove this line.
       # Push new changes first, before adding new tests to your config.
-      - run:
-          name: Change cwd
-          command: cd .. && cd src/examples/example-angular-npm-lib
-      - angular-npm-orb/test:
-          parameters:
-            - project: test-lib
-      - angular-npm-orb/build:
-          parameters:
-            - project: test-lib
-      - angular-npm-orb/publish:
-          requires:
-            angular-npm-orb/build
-          parameters:
-            - path: example-angular-npm-lib/dist/test-lib
-            - access: private
 
 workflows:
   # Prior to producing a development orb (which requires credentials) basic validation, linting, and even unit testing can be performed.
@@ -89,6 +74,21 @@ workflows:
     jobs:
       # Run any integration tests defined within the `jobs` key.
       - integration-test-1
+      - angular-npm-orb/test:
+          parameters:
+            - project: test-lib
+          working_directory: ~/src/examples/example-angular-npm-lib
+      - angular-npm-orb/build:
+          parameters:
+            - project: test-lib
+          working_directory: ~/src/examples/example-angular-npm-lib
+      - angular-npm-orb/publish:
+          requires:
+            - angular-npm-orb/build
+          parameters:
+            - path: example-angular-npm-lib/dist/test-lib
+            - access: private
+          working_directory: ~/src/examples/example-angular-npm-lib
       # Publish a semver version of the orb. relies on
       # the commit subject containing the text "[semver:patch|minor|major|skip]"
       # as that will determine whether a patch, minor or major
