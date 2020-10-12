@@ -13,9 +13,10 @@ usage:
         - angular-npm-orb/test:
             project: test-lib
         - angular-npm-orb/build:
+            requires:
+              - angular-npm-orb/test
             project: test-lib
         - angular-npm-orb/publish:
             requires:
               - angular-npm-orb/build
             path: dist/test-lib
-            access: private

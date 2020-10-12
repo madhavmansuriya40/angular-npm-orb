@@ -18,7 +18,7 @@ steps:
       command: git checkout package-lock.json
   - run:
       name: Building
-      command: npm run build -- <<parameters.project>>
+      command: npm run build --prod -- <<parameters.project>>
   - persist_to_workspace:
       root: .
       paths:
