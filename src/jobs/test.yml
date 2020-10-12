@@ -4,12 +4,12 @@ description: >
 parameters:
   project:
     type: string
-    skip-tests:
-      type: boolean
-      default: false
-    skip-e2e:
-      type: boolean
-      default: true
+  skip-tests:
+    type: boolean
+    default: false
+  skip-e2e:
+    type: boolean
+    default: true
 
 executor:
   name: node
