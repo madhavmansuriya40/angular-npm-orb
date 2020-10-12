@@ -16,7 +16,10 @@ steps:
       at: .
   - run:
       name: Initializing npm publishing
-      command: sudo npm install -g npm-cli-adduser && npm-cli-adduser
+      command: |
+        echo _auth=$NPM_TOKEN >> .npmrc
+        echo email=$NPM_EMAIL >> .npmrc
+        echo always-auth=true >> .npmrc
   - run:
       name: Publishing npm package
       command: cd <<parameters.path>> && npm publish --access=<<parameters.access>>
