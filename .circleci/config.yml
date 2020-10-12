@@ -60,4 +60,4 @@ workflows:
           publish-version-tag: false
           filters:
             branches:
-              only: master
+              only: main
