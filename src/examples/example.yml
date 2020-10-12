@@ -6,17 +6,19 @@ description: >
 usage:
   version: 2.1
   orbs:
-    angular-npm-orb: code0987/angular-npm-orb@1.2.3
+    angular-npm-orb: code0987/angular-npm-orb@dev:alpha
   workflows:
     use-my-orb:
       jobs:
         - angular-npm-orb/test:
             parameters:
-              - project: example-angular-npm-lib
+              - project: test-lib
         - angular-npm-orb/build:
             parameters:
-              - project: example-angular-npm-lib
+              - project: test-lib
         - angular-npm-orb/publish:
+            requires:
+              angular-npm-orb/build
             parameters:
-              - project: example-angular-npm-lib
+              - path: example-angular-npm-lib/dist/test-lib
               - access: private

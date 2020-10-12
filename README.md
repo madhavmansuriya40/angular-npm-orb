@@ -1,10 +1,10 @@
-# Orb Project Template
+# Angular NPM Orb
 <!---
 [![CircleCI Build Status](https://circleci.com/gh/Code0987/angular-npm-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/Code0987/angular-npm-orb) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/code0987/angular-npm-orb)](https://circleci.com/orbs/registry/orb/code0987/angular-npm-orb) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/Code0987/angular-npm-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
 --->
 
-A starter template for orb projects. Build, test, and publish orbs automatically on CircleCI with [Orb-Tools](https://circleci.com/orbs/registry/orb/circleci/orb-tools).
+A simple angular npm orb. Build, test, and publish angular npm libraries automatically with CircleCI.
 
 Additional READMEs are available in each directory.
 
