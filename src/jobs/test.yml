@@ -6,7 +6,7 @@ parameters:
     type: string
 
 executor:
-  name: browsers
+  name: node
 
 steps:
   - checkout
