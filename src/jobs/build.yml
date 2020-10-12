@@ -1,29 +1,26 @@
 description: >
-  Test
+  Build
 
-executors: 
-  node:
-    docker:
-      - image: circleci/node
+parameters:
+  project:
+    type: string
 
-build:
-  parameters:
-    project:
-      type: string
+executor: 
+  docker:
+    - image: circleci/node
 
-  executor: node
-  steps:
-    - checkout
-    - run:
-        name: 🛠️ Installing npm dependencies
-        command: if [ ! -d "node_modules" ]; then npm ci; fi
-    - run:
-        name: 🛠️ Restoring package-lock.json
-        command: git checkout package-lock.json
-    - run:
-        name: 🛠️ Building
-        command: npm run build -- << parameters.project >>
-    - persist_to_workspace:
-        root: .
-        paths:
-          - dist
+steps:
+  - checkout
+  - run:
+      name: 🛠️ Installing npm dependencies
+      command: if [ ! -d "node_modules" ]; then npm ci; fi
+  - run:
+      name: 🛠️ Restoring package-lock.json
+      command: git checkout package-lock.json
+  - run:
+      name: 🛠️ Building
+      command: npm run build -- << parameters.project >>
+  - persist_to_workspace:
+      root: .
+      paths:
+        - dist
