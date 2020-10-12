@@ -9,8 +9,8 @@ parameters:
     default: public
 
 executor:
-  docker:
-    - image: circleci/node
+  name: node
+  image: circleci/node
 
 steps:
   - attach_workspace:

@@ -6,8 +6,8 @@ parameters:
     type: string
 
 executor:
-  docker:
-    - image: circleci/node:browsers
+  name: browsers
+  image: circleci/node:browsers
 
 steps:
   - checkout

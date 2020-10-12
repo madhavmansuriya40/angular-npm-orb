@@ -6,8 +6,8 @@ parameters:
     type: string
 
 executor:
-  docker:
-    - image: circleci/node
+  name: node
+  image: circleci/node
 
 steps:
   - checkout
