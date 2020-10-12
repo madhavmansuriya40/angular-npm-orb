@@ -25,12 +25,12 @@ steps:
         sudo apt-get install google-chrome-stable
   - run:
       name: Building
-      command: npm run build -- << parameters.project >>
+      command: npm run build -- <<parameters.project>>
   - run:
       name: Running unit tests
-      command: npm run test -- << parameters.project >> --watch false --progress false
+      command: npm run test -- <<parameters.project>> --watch false --progress false
   - run:
       name: Running e2e tests
-      command: npm run e2e -- << parameters.project >>
+      command: npm run e2e -- <<parameters.project>>
   - store_test_results:
       path: test-results
