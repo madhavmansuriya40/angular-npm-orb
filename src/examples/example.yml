@@ -11,14 +11,11 @@ usage:
     use-my-orb:
       jobs:
         - angular-npm-orb/test:
-            parameters:
-              - project: test-lib
+            project: test-lib
         - angular-npm-orb/build:
-            parameters:
-              - project: test-lib
+            project: test-lib
         - angular-npm-orb/publish:
             requires:
               angular-npm-orb/build
-            parameters:
-              - path: example-angular-npm-lib/dist/test-lib
-              - access: private
+            path: example-angular-npm-lib/dist/test-lib
+            access: private
