@@ -6,10 +6,10 @@ parameters:
     type: string
   test:
     type: boolean
-    default: false
+    default: true
   e2e:
     type: boolean
-    default: true
+    default: false
 
 executor:
   name: node
